@@ -1,0 +1,83 @@
+:root {
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  color: #1a1a1a;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #f3f4f6;
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.75rem 1.25rem;
+  background: #ffffff;
+  border-bottom: 1px solid #e5e7eb;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.title {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.controls button {
+  padding: 0.4rem 0.9rem;
+  font-size: 0.9rem;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  background: #ffffff;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.controls button:hover:not(:disabled) {
+  background: #f3f4f6;
+}
+
+.controls button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.page-info {
+  font-size: 0.9rem;
+  font-variant-numeric: tabular-nums;
+  min-width: 8rem;
+  text-align: center;
+}
+
+/* El visor necesita un contenedor con altura definida y position relative. */
+.viewer-container {
+  position: relative;
+  flex: 1;
+  overflow: hidden;
+}
+
+/* PDFSlickViewer renderiza un .pdfSlickContainer; lo hacemos llenar y scrollear. */
+.viewer-container .pdfSlickContainer {
+  position: absolute;
+  inset: 0;
+  overflow: auto;
+  background: #525659;
+}
