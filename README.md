@@ -61,14 +61,37 @@ pnpm preview
 
 ## PDF de ejemplo
 
-Se carga desde una URL publica de pdf.js de Mozilla:
+Por defecto carga un PDF publico de pdf.js de Mozilla (`helloworld.pdf`, 1 pagina).
+
+Puedes probar cualquier otro PDF sin tocar codigo, pasandolo por query param:
 
 ```
-https://raw.githubusercontent.com/mozilla/pdf.js/master/examples/learning/helloworld.pdf
+http://localhost:5173/?pdf=<url-del-pdf>
 ```
 
-Puedes cambiar la constante `PDF_URL` en `src/App.tsx` por cualquier otra URL o
-por una ruta local (por ejemplo `/sample.pdf` colocando el archivo en `public/`).
+Ejemplo con un PDF de 14 paginas (para probar la navegacion):
+
+```
+http://localhost:5173/?pdf=https://raw.githubusercontent.com/mozilla/pdf.js/master/web/compressed.tracemonkey-pldi-09.pdf
+```
+
+Tambien puedes cambiar la constante `DEFAULT_PDF_URL` en `src/App.tsx`, o colocar
+un archivo en `public/` y usar `?pdf=/sample.pdf`.
+
+## Gotcha: el worker de pdf.js en Vite
+
+PDFSlick usa pdf.js, que necesita un Web Worker. En Vite hay que apuntar
+`GlobalWorkerOptions.workerSrc` al worker servido como asset (ver `src/main.tsx`):
+
+```ts
+import { GlobalWorkerOptions } from "pdfjs-dist";
+import pdfWorkerUrl from "pdfjs-dist/build/pdf.worker.min.mjs?url";
+GlobalWorkerOptions.workerSrc = pdfWorkerUrl;
+```
+
+Sin esto, pdf.js cae a un "fake worker", el documento no carga y veras
+`Pagina 0 / 0`. `pdfjs-dist` debe estar en la MISMA version que usa
+`@pdfslick/core` (aqui 6.0.227) para que el worker sea compatible.
 
 ## Estructura
 

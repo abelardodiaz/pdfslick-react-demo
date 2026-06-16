@@ -11,6 +11,9 @@ importers:
       '@pdfslick/react':
         specifier: ^4.0.0
         version: 4.0.0(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
+      pdfjs-dist:
+        specifier: 6.0.227
+        version: 6.0.227
       react:
         specifier: ^19.1.0
         version: 19.2.7
